@@ -12,7 +12,6 @@ const tasks = ref([])
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
-    <button type="button" @click="count++">count is {{ count }}</button>
   </div> -->
   <main>
         <HelloUser />

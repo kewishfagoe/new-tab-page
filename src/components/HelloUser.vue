@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import Card from '../layouts/Card.vue'
+import SetUsernameModal from './SetUsernameModal.vue'
 
 const username = ref<string>("friend")
-const newUsername = ref<string>("") // bind this to input field in modal for adding username. v-model
+
+const showModal = ref<boolean>(false)
 
 const loadUsername = () => {
     try {
@@ -17,16 +19,17 @@ const loadUsername = () => {
 }
 
 const updateUsername = (newValue: string) => {
-      username.value = newValue
-      try {
-        if (newValue === 'user') {
-          localStorage.removeItem('pro')
+    username.value = newValue
+    try {
+        if (newValue === 'friend') {
+          localStorage.removeItem('username')
         } else {
-          localStorage.setItem('pro', newValue)
+          localStorage.setItem('username', newValue)
         }
-      } catch (error) {
-        console.warn('localStorage write failed:', error)
-      }
+    } catch (error) {
+        console.warn('localStorage write failed: ', error)
+    }
+    showModal.value = false
 }
 
 const now = ref<Date>(new Date())
@@ -87,7 +90,7 @@ onUnmounted(() => {
     <Card>
         <template v-slot:heading>
             <div class="container">
-                <img src="/asterisk.svg" class="logo" alt="App logo" />
+                <img src="/asterisk.svg" class="logo" alt="App logo" @click="showModal = true" />
                 <h2>Hello {{ username }}.</h2>
             </div>
         </template>
@@ -100,6 +103,7 @@ onUnmounted(() => {
             </div>
         </template>
     </Card>
+    <SetUsernameModal v-if="showModal" @close="showModal = false" @updateUsername="updateUsername" />
 </template>
 
 <style scoped>
@@ -148,6 +152,9 @@ onUnmounted(() => {
     .content {
         flex-direction: column;
         align-items: center;
+    }
+    .content div {
+        margin: 10px;
     }
 }
 </style>
