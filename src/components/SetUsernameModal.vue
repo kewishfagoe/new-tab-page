@@ -38,7 +38,7 @@ onMounted(() => {
 
                     <div class="modal-body">
                         <div class="input-container">
-                            <input type="text" id="username-input" v-model="newUsername" ref="newUsernameInput" @keyup.enter="confirmUsername" @keyup.esc="$emit('close')">
+                            <input type="text" id="username-input" name="newUsername" v-model="newUsername" ref="newUsernameInput" @keyup.enter="confirmUsername" @keyup.esc="$emit('close')">
                         </div>
                         <div v-if="showError" class="error">Username cannot be empty.</div>
                     </div>
@@ -116,14 +116,6 @@ onMounted(() => {
     flex-wrap: wrap;
 }
 
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter {
     opacity: 0;

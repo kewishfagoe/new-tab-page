@@ -1,10 +1,39 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 import HelloUser from './components/HelloUser.vue'
-// import Card from './layouts/Card.vue'
+import AddTaskForm from './components/AddTaskForm.vue'
+import type { Task } from './types'
 
-const tasks = ref([])
+const tasks = ref<Task[]>([])
+
+function addTask(newTask: string) {
+    tasks.value.push({
+        // id: Date.now().toString(),
+        id: crypto.randomUUID(),
+        title: newTask,
+        done: false
+    })
+}
+
+const loadTasks = () => {
+    try {
+        const storedTasks = localStorage.getItem('tasks')
+        if (storedTasks) {
+            tasks.value = storedTasks ? JSON.parse(storedTasks) : []
+        }
+    } catch (error) {
+        console.warn('localStorage access failed:', error)
+    }
+}
+
+onMounted(() => {
+    loadTasks()
+})
+
+watch(tasks, (newVal: Task[]) => {
+  localStorage.setItem('tasks', JSON.stringify(newVal))
+}, { deep: true })
 </script>
 
 <template>
@@ -14,7 +43,8 @@ const tasks = ref([])
     </a>
   </div> -->
   <main>
-        <HelloUser />
+        <HelloUser :number-of-tasks="tasks.length"/>
+        <AddTaskForm @add-task="addTask" />
         <!-- <Card>
             <template v-slot:heading>
                 <h2>Placeholder heading!</h2>

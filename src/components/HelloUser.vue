@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+
+const props = defineProps<{
+    numberOfTasks?: number
+}>()
+
 import Card from '../layouts/Card.vue'
 import SetUsernameModal from './SetUsernameModal.vue'
 
@@ -75,7 +80,6 @@ let timer: number | undefined
 
 onMounted(() => {
     loadUsername()
-    console.log(username.value)
 
     updateNow()
     timer = setInterval(updateNow, 60000)
@@ -99,7 +103,7 @@ onUnmounted(() => {
                 <div class="date">{{ formattedDate }}</div>
                 <div class="time">{{ formattedTime }}</div>
                 <div class="week">Week <span class="val">{{ weekNumber }}</span></div>
-                <div>number of tasks</div>
+                <div>Tasks <span class="val">{{ props.numberOfTasks ? props.numberOfTasks : 0 }}</span></div>
             </div>
         </template>
     </Card>
