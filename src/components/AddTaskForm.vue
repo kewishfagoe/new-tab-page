@@ -96,7 +96,7 @@ input {
 }
 .error {
     font-size: smaller;
-    color: crimson;
+    color: #DC143C;
     margin-top: 5px;
 }
 
