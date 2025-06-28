@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const props = defineProps<{
     numberOfTasks?: number
+    totalTasksCompleted: number
 }>()
 
 import Card from '../layouts/Card.vue'
@@ -103,7 +104,7 @@ onUnmounted(() => {
                 <div class="date">{{ formattedDate }}</div>
                 <div class="time">{{ formattedTime }}</div>
                 <div class="week">Week <span class="val">{{ weekNumber }}</span></div>
-                <div>Tasks <span class="val">{{ props.numberOfTasks ? props.numberOfTasks : 0 }}</span></div>
+                <div>Tasks <span class="val">{{ props.totalTasksCompleted ? props.totalTasksCompleted : 0 }} / {{ props.numberOfTasks ? props.numberOfTasks : 0 }}</span></div>
             </div>
         </template>
     </Card>

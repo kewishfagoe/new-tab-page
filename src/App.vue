@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 
 import HelloUser from './components/HelloUser.vue'
 import AddTaskForm from './components/AddTaskForm.vue'
@@ -7,6 +7,10 @@ import type { Task } from './types'
 import TasksList from './components/TasksList.vue'
 
 const tasks = ref<Task[]>([])
+
+const totalTasksCompleted = computed(() => {
+   return tasks.value.filter(task => task.done).length || 0;
+})
 
 function addTask(newTask: string) {
     tasks.value.push({
@@ -58,10 +62,9 @@ watch(tasks, (newVal: Task[]) => {
     </a>
   </div> -->
   <main>
-        <HelloUser :number-of-tasks="tasks.length"/>
+        <HelloUser :number-of-tasks="tasks.length" :total-tasks-completed="totalTasksCompleted" />
         <AddTaskForm @add-task="addTask" />
         <TasksList :tasks="tasks" @delete-task="deleteTask" @complete-task="completeTask" />
-        <p>{{ totalTasksCompleted }}</p>
         <!-- <Card>
             <template v-slot:heading>
                 <h2>Placeholder heading!</h2>
