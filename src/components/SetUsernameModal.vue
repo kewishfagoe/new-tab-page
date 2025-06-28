@@ -38,7 +38,7 @@ onMounted(() => {
 
                     <div class="modal-body">
                         <div class="input-container">
-                            <input type="text" id="username-input" name="newUsername" v-model="newUsername" ref="newUsernameInput" @keyup.enter="confirmUsername" @keyup.esc="$emit('close')">
+                            <input type="text" id="username-input" name="newUsername" v-model="newUsername" ref="newUsernameInput" @keyup.enter="confirmUsername" @keyup.esc="$emit('close')" autocomplete="off">
                         </div>
                         <div v-if="showError" class="error">Username cannot be empty.</div>
                     </div>
