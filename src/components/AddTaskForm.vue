@@ -32,7 +32,7 @@ function addTaskFormSubmitted() {
         <template v-slot:body>
             <div class="content">
                 <form class="input-container" @submit.prevent="addTaskFormSubmitted">
-                    <input type="text" id="add-task-input" name="newTask" v-model="newTask" >
+                    <input type="text" id="add-task-input" name="newTask" v-model="newTask" @input="showError = false" />
                     <button type="button" class="add-task-button" @click="addTaskFormSubmitted">Add</button>
                 </form>
                 <div v-if="showError" class="error">Task cannot be empty.</div>
