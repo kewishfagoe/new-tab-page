@@ -4,6 +4,7 @@ import { ref, onMounted, watch } from 'vue'
 import HelloUser from './components/HelloUser.vue'
 import AddTaskForm from './components/AddTaskForm.vue'
 import type { Task } from './types'
+import TasksList from './components/TasksList.vue'
 
 const tasks = ref<Task[]>([])
 
@@ -14,6 +15,20 @@ function addTask(newTask: string) {
         title: newTask,
         done: false
     })
+}
+
+function deleteTask(id: string) {
+    const taskIndex = tasks.value.findIndex((task) => task.id === id);
+    if (taskIndex !== -1) {
+        tasks.value.splice(taskIndex, 1)
+    }
+}
+
+function completeTask(id: string) {
+    const task = tasks.value.find((task) => task.id === id)
+    if(task) {
+        task.done = !task.done
+    }
 }
 
 const loadTasks = () => {
@@ -45,6 +60,8 @@ watch(tasks, (newVal: Task[]) => {
   <main>
         <HelloUser :number-of-tasks="tasks.length"/>
         <AddTaskForm @add-task="addTask" />
+        <TasksList :tasks="tasks" @delete-task="deleteTask" @complete-task="completeTask" />
+        <p>{{ totalTasksCompleted }}</p>
         <!-- <Card>
             <template v-slot:heading>
                 <h2>Placeholder heading!</h2>
