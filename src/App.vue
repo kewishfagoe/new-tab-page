@@ -5,6 +5,7 @@ import HelloUser from './components/HelloUser.vue'
 import AddTaskForm from './components/AddTaskForm.vue'
 import type { Task } from './types'
 import TasksList from './components/TasksList.vue'
+import SearchForm from './components/SearchForm.vue'
 
 const tasks = ref<Task[]>([])
 
@@ -56,13 +57,14 @@ watch(tasks, (newVal: Task[]) => {
 </script>
 
 <template>
-  <!-- <div>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div> -->
-  <main>
+    <!-- <div>
+        <a href="https://vuejs.org/" target="_blank">
+            <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+        </a>
+    </div> -->
+    <main>
         <HelloUser :number-of-tasks="tasks.length" :total-tasks-completed="totalTasksCompleted" />
+        <SearchForm />
         <AddTaskForm @add-task="addTask" />
         <TasksList :tasks="tasks" @delete-task="deleteTask" @complete-task="completeTask" />
         <!-- <Card>
@@ -73,8 +75,17 @@ watch(tasks, (newVal: Task[]) => {
                 Placeholder body content!
             </template>
         </Card> -->
-  </main>
+
+        <footer>
+            <p class="">Made with ♡ by <a className="text-primary" href="https://github.com/kewishfagoe" rel="noopener noreferrer" target="_blank">Kewish &#8599;</a></p>
+        </footer>
+    </main>
 </template>
 
 <style scoped>
+footer {
+    color: #727272;
+    font-size: 12px;
+    margin-top: 6rem;
+}
 </style>
