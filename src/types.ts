@@ -20,3 +20,8 @@ export interface FullNewsData {
     time: number;
     type: string;
 }
+
+export interface CachedItem {
+    data: FullNewsData;
+    timestamp: number;
+}

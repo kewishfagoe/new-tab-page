@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import Card from '../layouts/Card.vue'
-import type { NewsItem, FullNewsData } from '../types';
+import type { NewsItem, FullNewsData, CachedItem } from '../types';
 
 const NEWS_API_URL = import.meta.env.VITE_NEWS_API_URL
 
@@ -13,22 +13,74 @@ const idsEndpoint = `${NEWS_API_URL}beststories.json?print=pretty&orderBy="$prio
 const linkDataEndpoint = (id: number) => `${NEWS_API_URL}item/${id}.json?print=pretty`
 
 
+
+const localStorageCacheKey = 'cachedNewsLinks'
+const EXPIRATION_MS = 1000 * 60 * 120 // 120 minutes / 2 hours
+
+const cache = new Map<number, CachedItem>()
+
+function isExpired(item: CachedItem): boolean {
+    return Date.now() - item.timestamp > EXPIRATION_MS
+}
+
+function loadNewsCacheFromStorage() {
+    const raw = localStorage.getItem(localStorageCacheKey)
+    if (raw) {
+        try {
+            const parsed: Record<number, CachedItem> = JSON.parse(raw)
+            for (const id in parsed) {
+                const item = parsed[id]
+                cache.set(Number(id), item)
+            }
+        } catch (e) {
+            console.warn('Failed to parse localStorage cache', e)
+        }
+    }
+}
+
+function saveNewsCacheToStorage() {
+    const obj = Object.fromEntries(cache)
+    localStorage.setItem(localStorageCacheKey, JSON.stringify(obj))
+}
+
+async function fetchNewsItemData(id: number): Promise<FullNewsData> {
+    const cached = cache.get(id)
+
+    if (cached && !isExpired(cached)) {
+        return cached.data
+    }
+
+    const res = await fetch(linkDataEndpoint(id))
+    const data: FullNewsData = await res.json()
+    cache.set(id, { data, timestamp: Date.now() })
+    return data
+}
+
+
+
 onMounted(async () => {
+    loadNewsCacheFromStorage()
+
     try {
         const res = await fetch(idsEndpoint)
         const ids: number[] = await res.json()
 
-        const linkPromises = ids.map(id =>
-            fetch(linkDataEndpoint(id)).then(res => res.json())
-        )
+        // const linkPromises = ids.map(id =>
+        //     fetch(linkDataEndpoint(id)).then(res => res.json())
+        // )
 
-        const results: FullNewsData[] = await Promise.all(linkPromises)
+        // const results: FullNewsData[] = await Promise.all(linkPromises)
+
+        const linkPromises = ids.map(id => fetchNewsItemData(id))
+        const results = await Promise.all(linkPromises)
 
         links.value = results.map(item => ({
             id: item.id,
             title: item.title,
             url: item.url
         }))
+
+        saveNewsCacheToStorage()
     } catch (err) {
         error.value = 'Failed to load news stories.'
         console.error(err)
