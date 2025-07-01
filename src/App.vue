@@ -6,6 +6,7 @@ import AddTaskForm from './components/AddTaskForm.vue'
 import type { Task } from './types'
 import TasksList from './components/TasksList.vue'
 import SearchForm from './components/SearchForm.vue'
+import TechNews from './components/TechNews.vue'
 
 const tasks = ref<Task[]>([])
 
@@ -67,6 +68,7 @@ watch(tasks, (newVal: Task[]) => {
         <SearchForm />
         <AddTaskForm @add-task="addTask" />
         <TasksList :tasks="tasks" @delete-task="deleteTask" @complete-task="completeTask" />
+        <TechNews />
         <!-- <Card>
             <template v-slot:heading>
                 <h2>Placeholder heading!</h2>
@@ -77,7 +79,7 @@ watch(tasks, (newVal: Task[]) => {
         </Card> -->
 
         <footer>
-            <p class="">Made with ♡ by <a className="text-primary" href="https://github.com/kewishfagoe" rel="noopener noreferrer" target="_blank">Kewish &#8599;</a></p>
+            <p class="">Made with ♡ by <a href="https://github.com/kewishfagoe" rel="noopener noreferrer" target="_blank">Kewish &#8599;</a></p>
         </footer>
     </main>
 </template>
