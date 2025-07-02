@@ -1,5 +1,31 @@
-# Vue 3 + TypeScript + Vite
+<p align="center"><img src="public/asterisk.svg" width="80" height="80" alt="Logo"></p>
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+# New Tab Page
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+My own custom New Tab page for web browsers. I wanted a personalized page every
+time I opened a new tab in a browser. I really enjoyed building this side project
+with Vue 3 Single-File Components.
+
+
+
+![](screenshot.png)
+
+
+## Tech Stack
+
+- Vue 3
+- TypeScript
+- CSS
+- Vite
+
+## Acknowledgements
+
+- The [favicon](https://icons.getbootstrap.com/icons/asterisk/) used.
+- SVG icons used: [X circle](https://icons.getbootstrap.com/icons/x-circle/) and [Plus circle](https://icons.getbootstrap.com/icons/plus-circle-fill/).
+- [css-loaders.com](https://css-loaders.com/spinner/) - For the loading spinner.
+- I appreciate the Vue [documentation](https://v2.vuejs.org/v2/examples/modal) for providing an [example modal](https://codesandbox.io/p/sandbox/github/vuejs/v2.vuejs.org/tree/master/src/v2/examples/vue-20-modal-component?file=%2Findex.html&from-embed) implementation.
+- I made use of the [Hacker News API](https://github.com/HackerNews/API) for [fetching](https://github.com/jsuau/hacker-news-api) news headlines.
+
+## License
+
+[AGPL-3.0](/LICENSE)
