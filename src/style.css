@@ -2,7 +2,7 @@
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --brand-color: #0000EE;
     --text-color: #213547;
-    --main-bg-color: #f8fafc;
+    --main-bg-color: #fcfdfe;
 
     font-family: var(--system-ui);
     line-height: 1.5;
