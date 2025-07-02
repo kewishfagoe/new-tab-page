@@ -1,5 +1,4 @@
 :root {
-    /* font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --brand-color: #0000EE;
     --text-color: #213547;
@@ -32,7 +31,6 @@ body {
     display: flex;
     min-width: 320px;
     min-height: 100vh;
-    /* background-image: url("./assets/pattern.png"); */
 }
 
 #app {

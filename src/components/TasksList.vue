@@ -29,7 +29,6 @@ function completeTask(id: string) {
             <div class="content">
                 <ul v-if="tasks !== undefined && tasks.length > 0">
                     <li class="task-container" v-for="(task, index) in props.tasks" :key="task.id">
-                        <!-- add checkbox, title, delete icon -->
                         <div class="task-item">
                             <div class="checkbox-container">
                                 <input
@@ -66,7 +65,6 @@ function completeTask(id: string) {
 <style scoped>
 .content {
     border-radius: 8px;
-    /* padding: 15px 16px; */
 }
 p {
     margin: 0;

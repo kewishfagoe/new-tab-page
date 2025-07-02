@@ -129,7 +129,6 @@ onUnmounted(() => {
 }
 
 .content {
-    /* font-size: 1.2rem; */
     border-radius: 8px;
     padding: 15px 16px;
 

@@ -17,7 +17,6 @@ const totalTasksCompleted = computed(() => {
 
 function addTask(newTask: string) {
     tasks.value.push({
-        // id: Date.now().toString(),
         id: crypto.randomUUID(),
         title: newTask,
         done: false
@@ -59,11 +58,6 @@ watch(tasks, (newVal: Task[]) => {
 </script>
 
 <template>
-    <!-- <div>
-        <a href="https://vuejs.org/" target="_blank">
-            <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
-    </div> -->
     <main>
         <HelloUser :number-of-tasks="tasks.length" :total-tasks-completed="totalTasksCompleted" />
         <SearchForm />
@@ -71,15 +65,6 @@ watch(tasks, (newVal: Task[]) => {
         <TasksList :tasks="tasks" @delete-task="deleteTask" @complete-task="completeTask" />
         <TechNews />
         <SavedLinks />
-        <!-- <Card>
-            <template v-slot:heading>
-                <h2>Placeholder heading!</h2>
-            </template>
-            <template v-slot:body>
-                Placeholder body content!
-            </template>
-        </Card> -->
-
         <footer>
             <p class="">Made with ♡ by <a href="https://github.com/kewishfagoe" rel="noopener noreferrer" target="_blank">Kewish &#8599;</a></p>
         </footer>

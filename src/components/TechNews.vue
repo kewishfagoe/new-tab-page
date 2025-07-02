@@ -65,12 +65,6 @@ onMounted(async () => {
         const res = await fetch(idsEndpoint)
         const ids: number[] = await res.json()
 
-        // const linkPromises = ids.map(id =>
-        //     fetch(linkDataEndpoint(id)).then(res => res.json())
-        // )
-
-        // const results: FullNewsData[] = await Promise.all(linkPromises)
-
         const linkPromises = ids.map(id => fetchNewsItemData(id))
         const results = await Promise.all(linkPromises)
 
@@ -123,7 +117,6 @@ onMounted(async () => {
 <style scoped>
 .content {
     border-radius: 8px;
-    /* padding: 15px 16px; */
 }
 ul {
     list-style: none;

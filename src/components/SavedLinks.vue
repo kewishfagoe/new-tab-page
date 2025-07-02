@@ -87,7 +87,6 @@ watch(links, (newVal: SavedLink[]) => {
 <style scoped>
 .content {
     border-radius: 8px;
-    /* padding: 15px 16px; */
 }
 ul {
     list-style: none;

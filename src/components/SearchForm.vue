@@ -10,7 +10,6 @@ function search() {
     if (searchQuery.value === "" || searchQuery.value.trim() === "") { return }
 
     let url = "";
-    // const urlFriendlyParam = searchQuery.value.trim().replace(/ /g,"+")
     const urlFriendlyParam = searchQuery.value
                                             .trim()
                                             .toLowerCase()
@@ -46,7 +45,6 @@ function search() {
 
     let redirectTo = `${url}${urlFriendlyParam}`
     window.location.href = redirectTo
-    // window.open(redirectTo)
 }
 
 const loadDefaultSearchEngine = () => {
@@ -56,7 +54,7 @@ const loadDefaultSearchEngine = () => {
             if (Object.values(SearchEngineEnum).includes(storedValue as SearchEngine)) {
                 searchEngine.value = storedValue as SearchEngine
             } else {
-                console.warn('Invalid user role:', storedValue)
+                console.warn('Invalid search engine:', storedValue)
             }
         }
     } catch (error) {
