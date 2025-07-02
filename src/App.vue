@@ -7,6 +7,7 @@ import type { Task } from './types'
 import TasksList from './components/TasksList.vue'
 import SearchForm from './components/SearchForm.vue'
 import TechNews from './components/TechNews.vue'
+import SavedLinks from './components/SavedLinks.vue'
 
 const tasks = ref<Task[]>([])
 
@@ -69,6 +70,7 @@ watch(tasks, (newVal: Task[]) => {
         <AddTaskForm @add-task="addTask" />
         <TasksList :tasks="tasks" @delete-task="deleteTask" @complete-task="completeTask" />
         <TechNews />
+        <SavedLinks />
         <!-- <Card>
             <template v-slot:heading>
                 <h2>Placeholder heading!</h2>

@@ -25,3 +25,9 @@ export interface CachedItem {
     data: FullNewsData;
     timestamp: number;
 }
+
+export interface SavedLink {
+    id: string;
+    title: string;
+    url: string;
+}
