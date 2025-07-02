@@ -6,7 +6,7 @@ My own custom New Tab page for web browsers. I wanted a personalized page every
 time I opened a new tab in a browser. I really enjoyed building this side project
 with Vue 3 Single-File Components.
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fcbba1ae-ac34-4f1f-aeca-22ea0ffd5634/deploy-status)](https://app.netlify.com/projects/custom-new-tab-page/deploys)
 
 ![](screenshot.png)
 
