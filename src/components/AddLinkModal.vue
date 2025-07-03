@@ -21,24 +21,32 @@ function addLink() {
         showError.value = true
         return
     }
-    if(!isValidHttpUrl(newUrl.value)) {
+
+    const inputUrl = newUrl.value.trim()
+    const finalUrl = inputUrl.match(/^https?:\/\//i) ? inputUrl : `https://${inputUrl}`
+    if(!isValidHttpUrl(finalUrl)) {
         showUrlError.value = true
         return
     }
 
-    emits("saveLink", newUrl.value.trim(), newTitle.value.trim())
+    emits("saveLink", finalUrl, newTitle.value.trim())
 }
 
 function isValidHttpUrl(urlString: string) {
     let url
 
+    const prefixedUrl = urlString.match(/^https?:\/\//i) ? urlString : `https://${urlString}`
+
     try {
-        url = new URL(urlString)
+        url = new URL(prefixedUrl)
     } catch (err) {
         return false
     }
 
-    return url.protocol === "http:" || url.protocol === "https:"
+    return (
+        (url.protocol === "http:" || url.protocol === "https:") &&
+        /\./.test(url.hostname)
+    )
 }
 
 function resetError() {
